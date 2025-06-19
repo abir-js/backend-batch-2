@@ -97,3 +97,18 @@ const filePath = path.join(__dirname, fileName)
 const deleteFile = fs.unlinkSync(filePath);
 console.log(appendFile); // undefined
 ```
+
+### 📝Rename file (Sync):
+
+**fs.renameSync():** Renames a file.
+ *  Syntax => `const data = fs.renameSync(oldpath, newPath);`
+ *  `filepath` => path to the file to read.
+ * `newPath` => new path or name.
+ 
+```js
+const newUpdatedFileName = "hello2.txt"
+const newUpdatedFilePath = path.join(__dirname, newUpdatedFileName)
+
+const renameFile = fs.renameSync(filePath, newUpdatedFilePath);
+console.log(renameFile); // undefined
+```
