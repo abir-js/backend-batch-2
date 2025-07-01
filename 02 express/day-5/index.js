@@ -9,8 +9,8 @@ app.use(express.urlencoded({ extended: true }));
 const data = [
   {
     id: 1,
-    name: "Suraj",
-    email: "suraj@gmail.com",
+    name: "Kamal",
+    email: "kamal@gmail.com",
   },
   {
     id: 2,
