@@ -10,7 +10,6 @@ router.get("/", (req, res) => {
 });
 
 router.get("/generate-token", (req, res) => {
-  // TODO: call u.til method to create a random token
   const token = generateToken();
 
   res.status(200).send({
