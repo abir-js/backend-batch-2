@@ -219,7 +219,10 @@ SELECT name, salary FROM users WHERE salary IS NOT NULL;
 SELECT name, salary FROM users WHERE salary BETWEEN 60000 AND 70000;
 
 --* find users born between 1990 and 1995
-SELECT name, date_of_birth FROM users WHERE date_of_birth BETWEEN '1990-01-01' AND '1995-12-31';
+SELECT name, date_of_birth
+FROM users
+WHERE
+    date_of_birth BETWEEN '1990-01-01' AND '1995-12-31';
 
 --* IN operator
 -- find male and female users except others
@@ -230,20 +233,129 @@ SELECT name, salary FROM users WHERE salary IN (60000, 65000, 70000);
 
 --* combining conditions (AND, OR)
 -- find users with salary > 70k or born before 1990
-SELECT name, salary, date_of_birth FROM users WHERE salary > 70000 OR date_of_birth < '1900-01-01';
+SELECT name, salary, date_of_birth
+FROM users
+WHERE
+    salary > 70000
+    OR date_of_birth < '1900-01-01';
 
 --* find female users who earn more than 60k
-SELECT name, salary FROM users WHERE gender = "Female" AND salary > 60000;
-
+SELECT name, salary
+FROM users
+WHERE
+    gender = "Female"
+    AND salary > 60000;
 
 --* order by
 -- sort by salary in desending order
-SELECT name, gender, salary FROM users ORDER BY gender ASC, salary DESC;
+SELECT name, gender, salary
+FROM users
+ORDER BY gender ASC, salary DESC;
 
 --* pattern matching (LIKE)
 -- select names starting with 'A'
 SELECT name FROM users WHERE name LIKE "A%";
-
+-- select emails ending with 'example.com'
 SELECT name, email FROM users WHERE email LIKE "%example%";
+
+--* Aggregate function
+-- count
+-- count all users
+SELECT COUNT(*) FROM users;
+
+SELECT MAX(salary) as max_salary FROM users;
+
+SELECT MIN(salary) as min_salary FROM users;
+
+SELECT AVG(salary) as avg_salary FROM users;
+
+SELECT SUM(salary) as total_salary FROM users;
+
+SELECT SUM(salary) as total_female_salary
+FROM users
+WHERE
+    gender = "Female";
+
+--* limit
+-- Get data of top 5 users
+SELECT name, salary FROM users ORDER BY salary DESC LIMIT 5;
+-- Get top 3 youngest users
+SELECT name, date_of_birth
+FROM users
+ORDER BY date_of_birth DESC
+LIMIT 5;
+
+--* update records
+-- increase salary of all female emplaoyes by 5k
+UPDATE users SET salary = salary + 5000 WHERE gender = "Female";
+
+--* delete
+DELETE FROM users WHERE salary < 50000;
+
+--? questions
+--* Find all Female users with a salary greater than 70,000, sorted by salary (descending).
+SELECT name, salary
+FROM users
+WHERE
+    gender = 'Female'
+    AND salary > 70000
+ORDER BY salary DESC;
+
+--* Find all users born after 1995 OR with salary less than 55,000.
+SELECT name, salary, date_of_birth
+FROM users
+WHERE
+    date_of_birth > '1995-12-31'
+    OR salary < 55000;
+
+--* Count how many Male users earn between 60,000 and 75,000.
+SELECT COUNT(*)
+FROM users
+WHERE
+    gender = "Male"
+    AND salary BETWEEN 60000 AND 75000;
+
+--* Find the highest salary among Females and display their name and salary.
+SELECT name, salary
+FROM users
+WHERE
+    gender = 'Female'
+    AND salary = (
+        SELECT MAX(salary)
+        FROM users
+        WHERE
+            gender = 'Female'
+    );
+
+--* Increase salary by 5,000 for all users earning less than 60,000.
+UPDATE users SET salary = salary + 5000 WHERE salary < 5000;
+
+--* Delete all users whose names start with 'I'.
+DELETE FROM users WHERE name LIKE "I%";
+
+--* Get the top 3 highest-paid Male employees, sorted by salary.
+SELECT name, salary
+FROM users
+WHERE
+    gender = "Male"
+ORDER BY salary DESC
+LIMIT 3;
+
+--* Find the average salary of users born before 1990.
+SELECT AVG(salary) FROM users WHERE date_of_birth < '1990-01-01';
+
+--* List all users whose email ends with 'example.com' and sort them by name (ascending).
+SELECT name, email
+FROM users
+WHERE
+    email LIKE "%example.com"
+ORDER BY name ASC;
+
+--* Find all users whose name contains the letter 'a' (case-insensitive) and salary is more than 60,000.
+SELECT name, salary
+FROM users
+WHERE
+    name LIKE "%a%"
+    AND salary > 60000;
 
 SELECT * FROM users;
