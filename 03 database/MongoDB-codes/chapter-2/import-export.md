@@ -23,7 +23,7 @@
 
 ```sh
 mongoimport --db video --collection comments --file day-3\video.json --jsonArray
-```.
+```
 
 - `--db shop`: Specifies the database name as "shop".
 - `--collection products`: Specifies the collection name as "products".
