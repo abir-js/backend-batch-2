@@ -1,9 +1,15 @@
-const Redis = require('ioredis');
+import Redis from 'ioredis';
 
-const redis = new Redis();
-
-redis.on('connect', () => {
-    console.log('Redis connected');
+const redis = new Redis({
+    host: 'localhost',
+    port: 6379
 });
 
-module.exports = { redis };
+async function main() {
+    await redis.set('foo', 'bar');
+    const value = await redis.get('foo');
+    console.log(value);
+}
+
+main();
+
