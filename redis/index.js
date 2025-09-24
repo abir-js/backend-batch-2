@@ -27,5 +27,10 @@ const redis = new Redis({
   // console.log(range);
 
   //? Set
-  
+  //* SADD
+  const added = await redis.sadd("myset:1", "apple", "banana", "coconut");
+  console.log(added);
+
+  const removed = await redis.srem("myset:1", "banana");
+  console.log(removed);
 })();
