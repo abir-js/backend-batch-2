@@ -28,9 +28,25 @@ const redis = new Redis({
 
   //? Set
   //* SADD
-  const added = await redis.sadd("myset:1", "apple", "banana", "coconut");
-  console.log(added);
+  // const added = await redis.sadd("myset:1", "apple", "banana", "coconut");
+  // console.log(added);
 
-  const removed = await redis.srem("myset:1", "banana");
-  console.log(removed);
+  //* SREM
+  // const removed = await redis.srem("myset:1", "banana");
+  // console.log(removed);
+
+  //? Hash
+  //* HSET
+  // const added = await redis.hset("myhash:1", "name", "John", "age", 30);
+  // console.log(added);
+
+  // await redis.hset("user:2000", {
+  //   name: "John",
+  //   age: 30,
+  //   email: "sYt4o@example.com",
+  // });
+
+  //* HGET
+  const value = await redis.hget("myhash:1", "name");
+  console.log(value);
 })();
